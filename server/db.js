@@ -1,17 +1,21 @@
-// var Sequelize = require('sequelize');
+var Sequelize = require('sequelize');
 
-// var orm = new Sequelize('myTest', 'root', null, {
-//   host: 'localhost',
-//   dialect: 'mysql',
-//   define: {
-//     timestamps: true
-//   }
-// });
+var db = new Sequelize('qaInt', 'root', null, {
+  host: 'localhost',
+  dialect: 'mysql',
+  define: {
+    timestamps: false
+  }
+});
 
-// var Users = orm.define('Users', {
-//   mixpanelId: Sequelize.STRING,
-//   firstName: Sequelize.STRING,
-//   lastName: Sequelize.STRING
-// });
+db
+  .authenticate()
+  .then(function(error) {
+    if (error) {
+      console.log('Unable to connect to database: ', error);
+    } else {
+      console.log('Successfully connected to MySql database');
+    }
+  });
 
-// module.exports = Users;
+module.exports = db;
